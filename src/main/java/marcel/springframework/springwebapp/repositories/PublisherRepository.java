@@ -1,8 +1,10 @@
 package marcel.springframework.springwebapp.repositories;
 
 import marcel.springframework.springwebapp.domain.Book;
+import marcel.springframework.springwebapp.domain.Publisher;
 import org.springframework.data.repository.CrudRepository;
 
-public interface BookRepository extends CrudRepository<Book, Long> {
+import java.util.concurrent.Flow;
 
+public interface PublisherRepository extends CrudRepository<Publisher, Long> {
 }
