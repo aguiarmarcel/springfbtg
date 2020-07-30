@@ -28,46 +28,47 @@ public class BootStrapData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Book lord = new Book();
-        Book hobbit = new Book();
-
-        lord.setTitle("Lord of the Ring");
-        lord.setIsbn("4354356456");
-
-        hobbit.setTitle("The Hobbit");
-        hobbit.setIsbn("5454534534");
-
-        Author token  = new Author();
-
-        token.setFirstName("jorge");
-        token.setLastName("Token");
 
         Publisher atica = new Publisher();
-
         atica.setName("Atica");
         atica.setAddressLIne1("Av. COronel Estevão");
         atica.setCity("Natal");
         atica.setState("RN");
         atica.setZip("11111111");
+        publisherRepository.save(atica);
+        System.out.println("Publisher COunt: " + publisherRepository.count());
 
-        atica.getPu_books().add(hobbit);
-        atica.getPu_books().add(lord);
+        Author token  = new Author();
+        token.setFirstName("jorge");
+        token.setLastName("Token");
 
-        token.getBooks().add(hobbit);
+        Book lord = new Book();
+        lord.setTitle("Lord of the Ring");
+        lord.setIsbn("4354356456");
+
         token.getBooks().add(lord);
-        hobbit.getAuthors().add(token);
         lord.getAuthors().add(token);
-
+        lord.setPublisher(atica);
+        atica.getbooks().add(lord);
         authorRepository.save(token);
-        bookRepository.save(hobbit);
         bookRepository.save(lord);
         publisherRepository.save(atica);
 
+        Book hobbit = new Book();
+        hobbit.setTitle("The Hobbit");
+        hobbit.setIsbn("5454534534");
 
-        System.out.println("Test:");
-        System.out.println("Authors:" + authorRepository.count());
+        token.getBooks().add(hobbit);
+        hobbit.getAuthors().add(token);
+        hobbit.setPublisher(atica);
+        atica.getbooks().add(hobbit);
+
+        authorRepository.save(token);
+        bookRepository.save(hobbit);
+        publisherRepository.save(atica);
+
         System.out.println("Books:" + bookRepository.count());
-        System.out.println("Publishers:" + publisherRepository.count());
+        System.out.println("Publisher number of books:" + atica.getbooks().size());
 
     }
 }

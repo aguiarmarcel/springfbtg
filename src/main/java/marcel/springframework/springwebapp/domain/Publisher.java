@@ -18,21 +18,22 @@ public class Publisher {
     private String zip;
 
 
-    @OneToMany(mappedBy="publisher")
-    private Set<Book> pu_books = new HashSet<>();
+    @OneToMany(mappedBy = "publisher")
+    //@JoinColumn(name = "publisher_id")
+    private Set<Book> books = new HashSet<>();
 
     public Publisher() {
     }
 
     public Publisher(Long id, String name, String addressLIne1,
-                     String city, String state, String zip, Set<Book> pu_books) {
+                     String city, String state, String zip, Set<Book> books) {
         this.id = id;
         this.name = name;
         AddressLIne1 = addressLIne1;
         this.city = city;
         this.state = state;
         this.zip = zip;
-        this.pu_books = pu_books;
+        this.books = books;
     }
 
     public Long getId() {
@@ -51,12 +52,12 @@ public class Publisher {
         this.name = name;
     }
 
-    public Set<Book> getPu_books() {
-        return pu_books;
+    public Set<Book> getbooks() {
+        return books;
     }
 
-    public void setPu_books(Set<Book> pu_books) {
-        this.pu_books = pu_books;
+    public void setPu_books(Set<Book> books) {
+        this.books = books;
     }
 
     public String getAddressLIne1() {
@@ -100,7 +101,7 @@ public class Publisher {
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", zip='" + zip + '\'' +
-                ", pu_books=" + pu_books +
+                ", pu_books=" + books +
                 '}';
     }
 
